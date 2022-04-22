@@ -1,20 +1,34 @@
 <template>
   <b-card
-    body-class="py-0 px-2 d-flex flex-sm-column"
+    :body-class="[
+      'py-0',
+      'px-1',
+      'd-flex',
+      isCartCard ? ' py-2' : 'flex-sm-column',
+    ]"
     id="custom-card"
-    class="shadow border-0 d-flex flex-md-column"
+    class="shadow border-0 position-relative"
+    :class="isCartCard ? '' : 'card-height'"
   >
-    <b-col class="flex-0" sm="12" cols="6">
+    <b-col
+      :class="isCartCard ? '' : 'flex-0'"
+      :sm="isCartCard ? '5' : '12'"
+      :cols="isCartCard ? '5' : '6'"
+    >
       <b-card-img
-        class="card-img-top px-sm-4 p-3"
-        style="height: 150px"
+        :class="isCartCard ? '' : 'px-sm-4 p-3'"
+        :style="{ height: isCartCard ? '90px' : '150px' }"
         :src="product.image"
       />
     </b-col>
     <b-card-body
       class="col-6 col-sm-12 px-1 pb-0 pt-2 py-sm-0 d-flex flex-column"
     >
-      <b-card-title title-tag="h6">
+      <b-card-title
+        class="ellipsis"
+        :class="isCartCard ? 'pr-2' : 'ellipsis-third-line'"
+        title-tag="h6"
+      >
         {{ product.title }}
       </b-card-title>
       <b-card-text class="mt-2 mb-0">
@@ -36,7 +50,15 @@
           </b-col>
         </b-row>
       </b-card-text>
-      <div class="justify-content-between d-flex mt-auto">
+      <b-button
+        size="sm"
+        class="remove-product-button"
+        variant="link"
+        @click="$emit('remove-product', product)"
+        v-if="isCartCard"
+        ><b-icon variant="danger" icon="trash"></b-icon
+      ></b-button>
+      <div v-else class="justify-content-between d-flex mt-auto">
         <b-col v-for="(button, i) in actionButtons" :key="i" cols="auto">
           <b-button
             @click="
@@ -71,6 +93,10 @@ export default {
     favoriteProductIds: {
       type: Array,
       default: () => [],
+    },
+    isCartCard: {
+      type: Boolean,
+      default: false,
     },
   },
   computed: {
@@ -111,25 +137,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-@media screen and (min-width: 600px) {
-  .card {
-    height: 280px;
-  }
-  .flex-0 {
-    flex: 0;
-  }
-  .card-title {
-    -webkit-line-clamp: 2 !important;
-  }
-}
-.card-title {
-  -webkit-line-clamp: 3;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-box-orient: vertical;
-  margin-bottom: 0;
-}
-</style>

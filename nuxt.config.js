@@ -18,7 +18,7 @@ export default {
   css: ["~/assets/base.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: ["~plugins/icons.client.js"],
+  plugins: ["~plugins/icons.client.js", "~/plugins/vuex-persistent.client.js"],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -41,7 +41,7 @@ export default {
   ],
   toast: {
     position: "top-center",
-    duration: '2000'
+    duration: "2000",
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {

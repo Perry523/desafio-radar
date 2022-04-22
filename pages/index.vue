@@ -1,6 +1,6 @@
 <template>
-  <b-container>
-    <b-row class="mb-3">
+  <div>
+    <b-row class="mb-3 mx-0">
       <b-col class="h5"> All Products ({{ products.length }}) </b-col>
       <b-col sm="6" md="4" lg="3">
         <search-products-input />
@@ -8,7 +8,7 @@
     </b-row>
     <b-row>
       <b-col
-        class="mb-1 mb-sm-3"
+        class="mb-1 mb-sm-3 px-lg-4"
         sm="6"
         md="4"
         lg="3"
@@ -23,7 +23,7 @@
       </b-col>
     </b-row>
     <b-overlay :show="loading" no-wrap />
-  </b-container>
+  </div>
 </template>
 
 <script>
