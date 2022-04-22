@@ -24,7 +24,7 @@
       />
     </div>
     <div
-      v-if="drawerData.name === 'Cart' && allPrices.products"
+      v-if="drawerData.name === 'Cart' && drawerData.list.length"
       class="h6 justify-content-around flex-wrap mx-3"
     >
       <b-row class="mb-2" v-for="(price, i) in prices" :key="i">

@@ -1,6 +1,6 @@
 <template>
   <b-input-group id="search-box">
-    <b-form-input class="border-right-0"></b-form-input>
+    <b-form-input v-model="search" class="border-right-0"></b-form-input>
     <b-input-group-append is-text>
       <b-icon-search />
     </b-input-group-append>
@@ -8,7 +8,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data() {
+    return {
+      search: "",
+    };
+  },
+  watch: {
+    search(value) {
+      this.$emit("search", value);
+    },
+  },
+};
 </script>
 
 <style lang="scss">
