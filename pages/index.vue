@@ -8,7 +8,7 @@
     </b-row>
     <b-row>
       <b-col
-        class="mb-1 mb-sm-3 px-lg-4"
+        class="mb-1 mb-sm-3"
         sm="6"
         md="4"
         lg="3"
