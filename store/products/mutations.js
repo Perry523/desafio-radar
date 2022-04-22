@@ -1,11 +1,13 @@
 export default {
-  pushIntoSelectedList(state, { product, list }) {
-    console.log(list);
-    list.push(product);
-    this.$toast.success("Produto adicionado");
+  pushIntoSelectedList(state, { product, selectedList, list }) {
+    selectedList.push(product);
+    this.$toast.success(`Product added into ${list}`);
   },
-  removeFromSelectedList(state, { list, i }) {
-    list.splice(i, 1);
-    this.$toast.success("Produto removido");
+  removeFromSelectedList(state, { selectedList, list, productIndex }) {
+    selectedList.splice(productIndex, 1);
+    this.$toast.success(`Product removed from ${list}`);
+  },
+  clearCart(state) {
+    state.cart = [];
   },
 };
