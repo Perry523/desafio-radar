@@ -1,4 +1,4 @@
-# desafio-radar
+# desafio-radar - Branches atualizadas: main e develop
 # link projeto: https://desafio-radar.netlify.app/
 ## Build Setup
 
