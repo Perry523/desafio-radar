@@ -1,7 +1,23 @@
 <template>
-  <b-navbar> </b-navbar>
+  <b-navbar>
+    {{ cart.length }}
+    {{ favorites.length }}
+  </b-navbar>
 </template>
 
 <script>
-export default {};
+import { mapGetters } from "vuex";
+export default {
+  computed: {
+    ...mapGetters({
+      getProductsByList: "products/getAllBySelectedList",
+    }),
+    cart() {
+      return this.getProductsByList("cart");
+    },
+    favorites() {
+      return this.getProductsByList("favorites");
+    },
+  },
+};
 </script>
