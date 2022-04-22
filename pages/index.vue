@@ -1,9 +1,9 @@
 <template>
   <div>
     <b-row class="mb-3 mx-0">
-      <b-col class="h5"> All Products ({{ products.length }}) </b-col>
+      <b-col class="h5"> All Products ({{ filteredProducts.length }}) </b-col>
       <b-col sm="6" md="4" lg="3">
-        <search-products-input />
+        <search-products-input @search="search = $event" />
       </b-col>
     </b-row>
     <b-row>
@@ -12,7 +12,7 @@
         sm="6"
         md="4"
         lg="3"
-        v-for="(product, i) in products"
+        v-for="(product, i) in filteredProducts"
         :key="i"
       >
         <product-card
@@ -32,14 +32,25 @@ export default {
   name: "IndexPage",
   data() {
     return {
-      products: [],
+      allProducts: [],
       loading: false,
+      search: "",
     };
+  },
+  async mounted() {
+    this.allProducts = await this.getProducts();
   },
   computed: {
     ...mapGetters({
       getProductsIdsByList: "products/getIdsBySelectedList",
     }),
+    filteredProducts() {
+      return this.allProducts.filter((product) => {
+        const productTitle = product.title.toLowerCase();
+        const searchText = this.search.toLowerCase();
+        return productTitle.includes(searchText);
+      });
+    },
     // if we get ids inside product card directly, getter will be triggered many times
     // that way we run just one time and pass to child
     favoriteProductIds() {
@@ -48,9 +59,6 @@ export default {
     productIdsOnCart() {
       return this.getProductsIdsByList("cart");
     },
-  },
-  async mounted() {
-    this.products = await this.getProducts();
   },
   methods: {
     async getProducts() {

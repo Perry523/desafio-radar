@@ -11,13 +11,13 @@
           :key="i"
           variant="link"
         >
-          <b-icon :icon="button.icon" />
+          <b-icon :variant="button.variant" :icon="button.icon" />
         </b-button>
         <b-badge
           :key="button.icon"
           pill
-          class="h6 mb-4 cart-badge"
-          variant="danger"
+          class="h6 mb-4 cart-badge text-white"
+          variant="warning"
           >{{ button.list.length }}</b-badge
         >
       </template>
