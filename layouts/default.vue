@@ -1,6 +1,7 @@
 <template>
-  <div>
+  <b-container>
     <navbar />
     <nuxt />
-  </div>
+    <sidebar />
+  </b-container>
 </template>
