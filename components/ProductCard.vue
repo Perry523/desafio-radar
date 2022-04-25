@@ -25,7 +25,7 @@
       class="col-6 col-sm-12 px-1 pb-0 pt-2 py-sm-0 d-flex flex-column"
     >
       <b-card-title
-        class="ellipsis"
+        class="ellipsis title-min-height"
         :class="isCartCard ? 'pr-2' : 'ellipsis-third-line'"
         title-tag="h6"
       >
@@ -33,12 +33,15 @@
       </b-card-title>
       <b-card-text class="mt-2 mb-0">
         <b-row class="justify-content-between">
-          <b-col class="font-weight-bold"> ${{ product.price }} </b-col>
+          <b-col cols="auto" class="font-weight-bold">
+            ${{ product.price }}
+          </b-col>
           <b-col
             v-b-tooltip.hover
             :title="`Reviewed by ${product.rating.count} people`"
             id="tooltip"
             class="d-flex align-items-center"
+            :class="isCartCard ? 'px-0' : ''"
             cols="auto"
           >
             <b-icon
@@ -50,14 +53,18 @@
           </b-col>
         </b-row>
       </b-card-text>
-      <b-button
-        size="sm"
-        class="remove-product-button"
-        variant="link"
-        @click="$emit('remove-product', product)"
-        v-if="isCartCard"
-        ><b-icon variant="danger" icon="trash"></b-icon
-      ></b-button>
+      <div v-if="isCartCard">
+        <b-button
+          size="sm"
+          class="remove-product-button"
+          variant="link"
+          @click="$emit('remove-product', product)"
+          ><b-icon variant="danger" icon="trash"></b-icon
+        ></b-button>
+        <div class="text-danger" v-if="addedIntoCart && favoriteDrawerSelected">
+          Already on cart
+        </div>
+      </div>
       <div v-else class="justify-content-between d-flex mt-auto">
         <b-col v-for="(button, i) in actionButtons" :key="i" cols="auto">
           <b-button
@@ -79,7 +86,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   props: {
     product: {
@@ -100,6 +107,9 @@ export default {
     },
   },
   computed: {
+    ...mapGetters({
+      drawerData: "drawer/getData",
+    }),
     actionButtons() {
       return [
         {
@@ -115,6 +125,12 @@ export default {
           variant: "info",
         },
       ];
+    },
+    favoriteDrawerSelected() {
+      return this.drawerData.name === "Favorites";
+    },
+    addedIntoCart() {
+      return this.productIdsOnCart.includes(this.product.id);
     },
   },
   methods: {

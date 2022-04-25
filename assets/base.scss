@@ -1,4 +1,4 @@
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 576px) {
   .flex-0 {
     flex: 0;
   }
@@ -6,16 +6,19 @@
     height: 280px;
   }
   .remove-product-button {
-    right: -10px;
+    right: -20px;
   }
 }
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 576px) {
   .ellipsis-third-line {
     -webkit-line-clamp: 3 !important;
   }
   .remove-product-button {
     right: -35px;
   }
+}
+.title-min-height {
+  min-height: 30px;
 }
 .ellipsis {
   -webkit-line-clamp: 2;

@@ -1,5 +1,5 @@
 <template>
-  <b-navbar variant="light" class="mx-2 py-0 mb-2">
+  <b-navbar variant="" class="mx-2 py-0 mb-2">
     <b-navbar-brand class="mr-auto">
       <b-img src="favicon.ico" height="70px"> </b-img>
     </b-navbar-brand>

@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import productIds from "@/mixins/products";
 export default {
   name: "IndexPage",
   data() {
@@ -41,9 +41,6 @@ export default {
     this.allProducts = await this.getProducts();
   },
   computed: {
-    ...mapGetters({
-      getProductsIdsByList: "products/getIdsBySelectedList",
-    }),
     filteredProducts() {
       return this.allProducts.filter((product) => {
         const productTitle = product.title.toLowerCase();
@@ -53,13 +50,8 @@ export default {
     },
     // if we get ids inside product card directly, getter will be triggered many times
     // that way we run just one time and pass to child
-    favoriteProductIds() {
-      return this.getProductsIdsByList("favorites");
-    },
-    productIdsOnCart() {
-      return this.getProductsIdsByList("cart");
-    },
   },
+  mixins: [productIds],
   methods: {
     async getProducts() {
       this.loading = true;
