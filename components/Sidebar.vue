@@ -105,7 +105,6 @@ export default {
   methods: {
     ...mapMutations({
       setDrawerGlobalState: "drawer/setState",
-      setDrawerData: "drawer/setData",
       removeFromSelectedList: "products/removeFromSelectedList",
       clearCart: "products/clearCart",
     }),

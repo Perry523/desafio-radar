@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { mapMutations } from "vuex";
 import productIds from "@/mixins/products";
 export default {
   name: "IndexPage",
@@ -38,6 +39,7 @@ export default {
     };
   },
   async mounted() {
+    this.setDrawerGlobalState(false);
     this.allProducts = await this.getProducts();
   },
   computed: {
@@ -53,6 +55,9 @@ export default {
   },
   mixins: [productIds],
   methods: {
+    ...mapMutations({
+      setDrawerGlobalState: "drawer/setState",
+    }),
     async getProducts() {
       this.loading = true;
       const products = await this.$axios.$get(
